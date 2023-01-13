@@ -31,23 +31,23 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/txt_Buscar"
+                android:id="@+id/txt_Id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:hint="ID"
+                android:inputType="textPersonName" />
 
             <Button
-                android:id="@+id/btn_Buscar"
-                android:layout_width="wrap_content"
+                android:id="@+id/btn_Consultar"
+                android:layout_width="136dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_weight="1"
-                android:onClick="onBtnBuscar"
-                android:text="Button" />
+                android:onClick="onBtnConsultar"
+                android:text="Consultar" />
         </LinearLayout>
 
         <LinearLayout
@@ -61,8 +61,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="TextView"
-                tools:text="Nombre" />
+                android:text="Nombre" />
 
             <EditText
                 android:id="@+id/txt_Nombre"
@@ -71,8 +70,7 @@
                 android:layout_marginHorizontal="30dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
@@ -86,8 +84,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="TextView"
-                tools:text="Apellido" />
+                android:text="Apellido" />
 
             <EditText
                 android:id="@+id/txt_Apellido"
@@ -96,8 +93,7 @@
                 android:layout_marginHorizontal="30dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
@@ -111,8 +107,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="TextView"
-                tools:text="Edad" />
+                android:text="Edad" />
 
             <EditText
                 android:id="@+id/txt_Edad"
@@ -121,8 +116,7 @@
                 android:layout_marginHorizontal="30dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
@@ -136,8 +130,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="TextView"
-                tools:text="Telefono" />
+                android:text="Telefono" />
 
             <EditText
                 android:id="@+id/txt_Telefono"
@@ -146,8 +139,7 @@
                 android:layout_marginHorizontal="30dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
@@ -157,10 +149,18 @@
             android:paddingHorizontal="30dp">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btn_Actulizar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onBtnActualizar"
                 android:text="Actualizar" />
+
+            <Button
+                android:id="@+id/btn_Eliminar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onBtnEliminar"
+                android:text="Eliminar" />
         </LinearLayout>
 
     </LinearLayout>

@@ -18,26 +18,25 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Registro extends AppCompatActivity {
-    String spinnerSelected = "";
-    String sexo = "";
+
     EditText txtNombre;
     EditText txtApellido;
     EditText txtEdad;
     EditText txtTelefono;
     EditText txtCorreo;
     EditText txtContresenia;
+    Spinner spnrEstadoCivil;
+    String spinnerSelected = "";
     RadioButton rbtFemenino;
     RadioButton rbtMasculino;
-    Spinner spnrEstadoCivil;
-
-
+    String sexo = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
         init();
-        List<String> estadoCivilList = Arrays.asList("    ","Casado(a)", "Conviviente", "Viudo(a)", "Soltero(a)", "Anulado(a)","Casi algo","MejorAmigo", "Solo es un amigo");
+        List<String> estadoCivilList = Arrays.asList("    ", "Casado(a)", "Conviviente", "Viudo(a)", "Soltero(a)", "Anulado(a)", "Casi algo", "MejorAmigo", "Solo es un amigo");
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, estadoCivilList));
@@ -56,7 +55,7 @@ public class Registro extends AppCompatActivity {
 
     }
 
-    private void init(){
+    private void init() {
         txtNombre = (EditText) findViewById(R.id.txt_nombre);
         txtApellido = (EditText) findViewById(R.id.txt_apellido);
         txtEdad = (EditText) findViewById(R.id.txt_edad);
@@ -68,25 +67,27 @@ public class Registro extends AppCompatActivity {
         spnrEstadoCivil = (Spinner) findViewById(R.id.spinner);
 
     }
+
     public void onRadioClickButtom(View view) {
         RadioButton buttomR = ((RadioButton) view);
         if (!buttomR.isChecked()) {
             return;
         }
         if (view.getId() == R.id.rdb_masculino) {
-            Toast.makeText(getApplicationContext(), "Selecciono masculino", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), "Selecciono masculino", Toast.LENGTH_SHORT).show();
+            toastMessage("Selecciono masculino");
             sexo = "Masculino";
         } else if (view.getId() == R.id.rdb_femenino) {
-            Toast.makeText(getApplicationContext(), "Selecciono femenino", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), "Selecciono femenino", Toast.LENGTH_SHORT).show();
+            toastMessage("Selecciono femenino");
             sexo = "Femenino";
         }
     }
 
-
-    public void onBtnRegistrar(View v){
+    public void onBtnRegistrar(View v) {
         MyOpenHelper dbHelper = new MyOpenHelper(v.getContext());
         final SQLiteDatabase db = dbHelper.getWritableDatabase();
-        if(db!=null){
+        if (db != null) {
             ContentValues cv = new ContentValues();
             cv.put("nombre", txtNombre.getText().toString());
             cv.put("apellido", txtApellido.getText().toString());
@@ -98,12 +99,13 @@ public class Registro extends AppCompatActivity {
             cv.put("sexo", sexo);
             db.insert("usuarios", null, cv);
             //Mostrar mensaje de usuario registrado
-            Toast.makeText(getApplicationContext(), "Estimado "+txtNombre.getText()+" "+txtApellido.getText()+" su cuenta fue creada con exito", Toast.LENGTH_SHORT).show();
+            toastMessage("Estimado " + txtNombre.getText() + " " + txtApellido.getText() + " su cuenta fue creada con exito");
+            //Toast.makeText(getApplicationContext(), "Estimado "+txtNombre.getText()+" "+txtApellido.getText()+" su cuenta fue creada con exito", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void onBtnBorrar(View v){
-        Boolean valor= false;
+    public void onBtnBorrar(View v) {
+        Boolean valor = false;
         txtNombre.setText("");
         txtApellido.setText("");
         txtEdad.setText("");
@@ -116,11 +118,25 @@ public class Registro extends AppCompatActivity {
 
     }
 
-    public void onBtnCancelar(View v){
+    public void onBtnCancelar(View v) {
         //Mensaje
-        Toast.makeText(getApplicationContext(), "Selecciono cancelar", Toast.LENGTH_SHORT).show();
+        toastMessage("Selecciono cancelar");
         //Llamar a Log in
         Intent call_login = new Intent(v.getContext(), Login.class);
         startActivity(call_login);
     }
+
+    public void onBtnConsultar(View view) {
+        /**
+         * Only calls "ConsultarUsuario" activity
+         */
+        toastMessage("Enviando a consultar");
+        Intent call_consultar = new Intent(view.getContext(), ConsultarUsuario.class);
+        startActivity(call_consultar);
+    }
+
+    private void toastMessage(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
 }

@@ -75,8 +75,8 @@ public class Login extends AppCompatActivity {
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.btn_acerca:
                 Intent call = new Intent(this, AcercaDe.class);
                 startActivity(call);

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C8B3ED"
+    android:background="@color/white"
     tools:context=".Registro">
 
     <LinearLayout
@@ -27,6 +27,13 @@
             android:layout_marginVertical="30dp"
             android:orientation="vertical"
             android:paddingVertical="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:orientation="horizontal">
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -283,7 +290,7 @@
 
                     <RadioGroup
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
+                        android:layout_height="match_parent">
 
                         <RadioButton
                             android:id="@+id/rdb_femenino"
@@ -337,7 +344,15 @@
                     android:layout_weight="1"
                     android:onClick="onBtnCancelar"
                     android:text="Cancelar" />
+
             </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_Consultar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onBtnConsultar"
+                android:text="Consultar" />
 
         </LinearLayout>
     </LinearLayout>
