@@ -2,7 +2,9 @@ package com.example.inicio8_6;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -82,8 +84,22 @@ public class Registro extends AppCompatActivity {
 
 
     public void onBtnRegistrar(View v){
-        //Mostrar mensaje de usuario registrado
-        Toast.makeText(getApplicationContext(), "Estimado "+txtNombre.getText()+" "+txtApellido.getText()+" su cuenta fue creada con exito", Toast.LENGTH_SHORT).show();
+        MyOpenHelper dbHelper = new MyOpenHelper(v.getContext());
+        final SQLiteDatabase db = dbHelper.getWritableDatabase();
+        if(db!=null){
+            ContentValues cv = new ContentValues();
+            cv.put("nombre", txtNombre.getText().toString());
+            cv.put("apellido", txtApellido.getText().toString());
+            cv.put("edad", txtEdad.getText().toString());
+            cv.put("telefono", txtTelefono.getText().toString());
+            cv.put("correo", txtCorreo.getText().toString());
+            cv.put("clave", txtContresenia.getText().toString());
+            cv.put("estadoCivil", spinnerSelected);
+            cv.put("sexo", sexo);
+            db.insert("usuarios", null, cv);
+            //Mostrar mensaje de usuario registrado
+            Toast.makeText(getApplicationContext(), "Estimado "+txtNombre.getText()+" "+txtApellido.getText()+" su cuenta fue creada con exito", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void onBtnBorrar(View v){
