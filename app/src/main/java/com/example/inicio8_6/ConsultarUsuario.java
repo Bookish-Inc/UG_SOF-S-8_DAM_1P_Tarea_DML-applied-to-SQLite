@@ -46,24 +46,27 @@ public class ConsultarUsuario extends AppCompatActivity {
     @SuppressLint("Range")
     public void onBtnConsultar(View v) {
         MyOpenHelper dbHelper = new MyOpenHelper(this);
-//        final SQLiteDatabase db = dbHelper.getReadableDatabase();
-        final SQLiteDatabase db = dbHelper.getWritableDatabase();
+        final SQLiteDatabase db = dbHelper.getReadableDatabase();
+//        final SQLiteDatabase db = dbHelper.getWritableDatabase();
+        System.out.println("IF CONSULTA ---> " + db);
         if (db != null) {
             int id = Integer.parseInt(txtId.getText().toString());
             Cursor c = db.rawQuery("SELECT * FROM usuarios WHERE _id=" + id, null);
+//            System.out.println("IF CURSOR 1 ---> " + c);
+//            System.out.println("IF CURSOR 2 ---> " + c.getString(c.getColumnIndex("_id")).toString() != null);
             if (c != null) {
-                c.moveToFirst();
+//                c.moveToFirst();
                 do {
                     txtNombre.setText(c.getString(c.getColumnIndex("nombre")).toString());
                     txtApellido.setText(c.getString(c.getColumnIndex("apellido")).toString());
                     txtEdad.setText(c.getString(c.getColumnIndex("edad")).toString());
                     txtTelefono.setText(c.getString(c.getColumnIndex("telefono")).toString());
                 } while (c.moveToNext());
+                toastMessage("Datos consultados");
             }
-            c.close();
-            db.close();
+//            c.close();
+//            db.close();
         }
-        toastMessage("Datos consultados");
     }
 
     public void onBtnActualizar(View view) {
@@ -78,6 +81,10 @@ public class ConsultarUsuario extends AppCompatActivity {
         /**
          * Dale data on DataBase based on ID
          */
+        MyOpenHelper dbHelper = new MyOpenHelper(this);
+        final SQLiteDatabase db = dbHelper.getWritableDatabase();
+        int id = Integer.parseInt(txtId.getText().toString());
+        db.delete("usuarios", "_id=" + id, null);
         toastMessage("Datos eliminados");
 
     }
