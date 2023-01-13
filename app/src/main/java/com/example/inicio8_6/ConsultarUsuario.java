@@ -3,6 +3,7 @@ package com.example.inicio8_6;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -49,12 +50,12 @@ public class ConsultarUsuario extends AppCompatActivity {
         final SQLiteDatabase db = dbHelper.getReadableDatabase();
 //        final SQLiteDatabase db = dbHelper.getWritableDatabase();
         System.out.println("IF CONSULTA ---> " + db);
-        if (db != null) {
+        if (db != null && !txtId.getText().toString().equals("")) {
             int id = Integer.parseInt(txtId.getText().toString());
             Cursor c = db.rawQuery("SELECT * FROM usuarios WHERE _id=" + id, null);
 //            System.out.println("IF CURSOR 1 ---> " + c);
 //            System.out.println("IF CURSOR 2 ---> " + c.getString(c.getColumnIndex("_id")).toString() != null);
-            if (c != null) {
+            if (c != null && c.moveToNext()) {
 //                c.moveToFirst();
                 do {
                     txtNombre.setText(c.getString(c.getColumnIndex("nombre")).toString());
@@ -73,8 +74,18 @@ public class ConsultarUsuario extends AppCompatActivity {
         /**
          * Update date based on ID
          */
-        toastMessage("Datos actualizados");
-
+        MyOpenHelper dbHelper = new MyOpenHelper(this);
+        final SQLiteDatabase db = dbHelper.getWritableDatabase();
+        if (db != null) {
+            ContentValues cv = new ContentValues();
+            cv.put("nombre", txtNombre.getText().toString());
+            cv.put("apellido", txtApellido.getText().toString());
+            cv.put("edad", txtEdad.getText().toString());
+            cv.put("telefono", txtTelefono.getText().toString());
+            int id = Integer.parseInt(txtId.getText().toString());
+            db.update("usuarios", cv, "_id = " + id, null);
+            toastMessage("Datos actualizados");
+        }
     }
 
     public void onBtnEliminar(View view) {
@@ -86,7 +97,6 @@ public class ConsultarUsuario extends AppCompatActivity {
         int id = Integer.parseInt(txtId.getText().toString());
         db.delete("usuarios", "_id=" + id, null);
         toastMessage("Datos eliminados");
-
     }
 
     private void toastMessage(String message) {
